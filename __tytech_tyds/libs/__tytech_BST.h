@@ -124,23 +124,23 @@ namespace __tytech_tyds{
                 return _queryKth(v-(u->l?u->l->sz:0)-u->cnt,u->r);
             }
         public:
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] BST(){
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] BST(){
                 root = new node;
                 root->is_root = true;
                 root->cnt = 0;
             }
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] std::vector<T> traverse(){
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] std::vector<T> traverse(){
                 std::vector<T> ret;
                 _traverse(root,ret);
                 return ret;
             }
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] T findMin(){return _findMin(root)->val;}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] T findMax(){return _findMax(root)->val;}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] bool find(T x){return _find(x,root);}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] void insert(T v){root = _insert(v,root);}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] void erase(T v){root = _erase(v,root);}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] int queryRank(T v){return _queryRank(v,root);}
-            [[deprecated("This BST has been deprecated; please use ASL<T> instead.")]] std::pair<int,T> queryKth(int v){return _queryKth(v,root);}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] T findMin(){return _findMin(root)->val;}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] T findMax(){return _findMax(root)->val;}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] bool find(T x){return _find(x,root);}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] void insert(T v){root = _insert(v,root);}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] void erase(T v){root = _erase(v,root);}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] int queryRank(T v){return _queryRank(v,root);}
+            [[deprecated("This BST has been deprecated; please use AVL<T> instead.")]] std::pair<int,T> queryKth(int v){return _queryKth(v,root);}
         };
     }
 }
