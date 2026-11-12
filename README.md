@@ -1,9 +1,3 @@
-下面这份文档直接对应你仓库里那 9 个头文件，按“总览 → 快速开始 → 各组件 API → 编译要求 → 许可证”组织，可以直接保存为 `README.md` 或 `docs/README.md`。
-
----
-
-# __tytech_ext
-
 [![License: LGPL-2.1](https://img.shields.io/badge/License-LGPL--2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html)
 [![Last Commit](https://img.shields.io/github/last-commit/TengYve-Technology/__tytech_ext?color=blue)](https://github.com/TengYve-Technology/__tytech_ext/commits)
 [![Header-only](https://img.shields.io/badge/Header--only-yes-success)](https://github.com/TengYve-Technology/__tytech_ext)
