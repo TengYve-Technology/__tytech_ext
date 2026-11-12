@@ -6,5 +6,5 @@
 #include"__tytech_tyds/libs/__tytech_Priority_Queue.h"
 #include"__tytech_tyds/libs/__tytech_FastIO.h"
 
-// License: CC-BY-NC-SA-4.0
-// Copyright (c) 2026 _Fjc_
+// License: LGPL-2.1
+// Copyright (c) 2026 FJC-2013XH

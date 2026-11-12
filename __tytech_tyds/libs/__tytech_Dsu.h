@@ -3,9 +3,9 @@
 
 namespace __tytech_tyds{
     inline namespace __tytech_Dsu{
-        class Dsu{
+        template<typename T> class Dsu{
             std::vector<int> f;
-            std::unordered_map<int,int> ump;
+            std::unordered_map<T,int> ump;
             int sz = 0;
             void update(){
                 if(sz+10 > f.size()){
@@ -26,7 +26,7 @@ namespace __tytech_tyds{
                 f[x] = y;
             }
         public:
-            void merge(int x,int y){
+            void merge(T x,T y){
                 if(ump.find(x) == ump.end())    ump[x] = ++sz;
                 update();
                 if(ump.find(y) == ump.end())    ump[y] = ++sz;
@@ -34,7 +34,7 @@ namespace __tytech_tyds{
                 _merge(_find(ump[x]),_find(ump[y]));
             }
 
-            int find(int x){
+            int find(T x){
                 if(ump.find(x) == ump.end())    ump[x] = ++sz;
                 update();
                 return _find(ump[x]);

@@ -16,19 +16,19 @@
 
 ## 简介
 
-`__tytech_ext` 是一个 **header-only** 的 C++17 模板库，所有组件都位于命名空间 `__tytech_tyds` 下，通过 `inline namespace` 按功能分组。包含：
+`__tytech_ext` 是一个 **Header-Only** 的模板库，所有组件都位于命名空间 `__tytech_tyds` 下，通过 `inline namespace` 按功能分组。包含：
 
 | 头文件 | 组件 | 用途 |
 |---|---|---|
 | `__tytech_AVL.h` | `AVL<T>` | 带重复计数、排名、第 k 小查询的平衡二叉搜索树 |
-| `__tytech_BST.h` | `BST<T>` | 普通二叉搜索树（已弃用，请改用 `AVL<T>`） |
-| `__tytech_Database.h` | `Database<T>` | 基于路径的树形键值数据库（类似文件系统） |
+| `__tytech_BST.h` | `BST<T>` | 普通二叉搜索树 |
+| `__tytech_Database.h` | `Database<T>` | 基于路径的树形键值数据库 |
 | `__tytech_Dsu.h` | `Dsu` | 支持动态键的并查集 |
 | `__tytech_FastIO.h` | `FastIO` | 基于缓冲区的快速输入输出 |
 | `__tytech_Hash.h` | `Hash<T>` | 字符串/可转换类型的滚动哈希 |
 | `__tytech_Priority_Queue.h` | `Priority_Queue<T, Comp>` | 自定义比较器的优先队列 |
 
-所有组件均为头文件实现，无需编译链接，直接 `#include` 即可使用。
+所有组件均为头文件实现。
 
 ---
 
@@ -68,7 +68,7 @@ g++ -std=c++17 -O2 main.cpp -o main
 
 头文件：`__tytech_AVL.h`
 
-支持重复元素（每个节点维护 `cnt`），维护子树大小 `sz` 和高度 `ht`，插入/删除后自动旋转保持平衡。
+支持重复元素，维护子树大小 `sz` 和高度 `ht`，插入/删除后自动旋转保持平衡。
 
 **公开接口**
 
@@ -98,14 +98,16 @@ t.erase(5);                     // 删除一个 5
 
 ---
 
-### 2. `BST<T>` —— 普通二叉搜索树（已弃用）
+### 2. `BST<T>` —— 普通二叉搜索树
+
+>（已弃用）请使用 `AVL<T>`。
 
 头文件：`__tytech_BST.h`
 
-接口与 `AVL<T>` 基本一致，但不做平衡，最坏情况退化为链。**所有公开方法均标记 `[[deprecated]]`**，编译时会提示改用 `AVL<T>`。
+接口与 `AVL<T>` 一致，但不做平衡，最坏情况退化为链。
 
 ```cpp
-BST<int> t;   // 编译警告：please use AVL<T> instead
+BST<int> t;
 ```
 
 ---
@@ -114,7 +116,7 @@ BST<int> t;   // 编译警告：please use AVL<T> instead
 
 头文件：`__tytech_Database.h`
 
-用树形结构模拟文件系统，支持目录与文件、相对/绝对路径、节点回收复用（`delnode` 空闲表）。
+模拟文件系统，支持目录与文件、相对/绝对路径、节点回收复用。
 
 **公开接口**
 
@@ -146,15 +148,11 @@ int w = db.get("x");      // 42（相对路径）
 db.ls("/");               // 打印目录树
 ```
 
-> 注意：`get` 失败时通过 `std::cerr` 输出错误，并用 `catch(...)` 吞掉异常，调用方无法区分“不存在”和“值为 `T()`”。
-
 ---
 
 ### 4. `Dsu` —— 动态键并查集
 
-头文件：`__tytech_Dsu.h`
-
-键为 `int`，首次出现时自动分配内部编号，内部用 `unordered_map` 做键到编号的映射，`vector` 自动扩容。
+头文件：`__tytech_Dsu.h`。
 
 **公开接口**
 
@@ -172,13 +170,13 @@ d.merge(20, 30);
 bool same = (d.find(10) == d.find(30));   // true
 ```
 
-> 注意：`find` 返回的是内部编号，不是原始键值；只支持 `int` 键。
+> 注意：`find` 返回的是内部编号，不是原始键值。
 
 ---
 
 ### 5. `FastIO` —— 快速输入输出
 
-头文件：`__tytech_FastIO.h`
+头文件：`__tytech_FastIO.h`。
 
 基于 1 MiB 输入/输出缓冲区，支持整数、浮点数、`char`、`std::string`。
 
@@ -212,9 +210,9 @@ io.flush();
 
 ### 6. `Hash<T>` —— 滚动哈希
 
-头文件：`__tytech_Hash.h`
+头文件：`__tytech_Hash.h`。
 
-把 `T` 转成字符串后做多项式哈希，默认底数 `998244353`（必须为奇数，否则抛 `std::invalid_argument`）。
+把 `T` 转成字符串后做多项式哈希，默认底数 `998244353`（必须为奇数）。
 
 **模板参数**
 
@@ -255,7 +253,7 @@ auto sub  = h.gethash(2, 4);   // "ell"
 
 ### 7. `Priority_Queue<T, Comp>` —— 优先队列
 
-头文件：`__tytech_Priority_Queue.h`
+头文件：`__tytech_Priority_Queue.h`。
 
 二叉堆实现，默认比较器 `mz_Comp<T>` 为 `x < y`，即**默认是大根堆**（与 `std::priority_queue` 一致）。
 
@@ -273,8 +271,8 @@ class Priority_Queue;
 | 方法 | 说明 |
 |---|---|
 | `void push(T x)` | 入堆 |
-| `void pop()` | 弹出堆顶（空堆调用未定义） |
-| `T top()` | 返回堆顶（空堆调用未定义） |
+| `void pop()` | 弹出堆顶 |
+| `T top()` | 返回堆顶 |
 | `bool empty()` | 是否为空 |
 
 **示例**
@@ -289,18 +287,15 @@ template<typename T> struct Greater{ bool operator()(T a, T b){ return a > b; } 
 Priority_Queue<int, Greater> pq;
 ```
 
-> 注意：`pop`/`top` 不检查空堆，调用前请先 `empty()`。
-
 ---
 
 ## 编译要求
 
-- **标准**：C++17（`FastIO.h` 使用 `if constexpr` 和 `_v` 变量模板，无法在 C++14 及以下编译）
+- **标准**：C++17（若无需 `__tytech_FastIO.h`，可以使用 C++14 编译）。
 - **编译器**：
   - GCC 8+
   - Clang 7+
-  - MSVC 2019+（VS 2017 15.7 起也支持 `if constexpr`，但建议 2019+）
-- **平台**：`FastIO.h` 依赖 `fread`/`fwrite`/`stdin`/`stdout`，适用于 Windows / Linux / macOS
+  - MSVC 2019+
 
 编译示例：
 
@@ -336,11 +331,7 @@ namespace __tytech_tyds{
 ## 限制
 
 - `BST<T>` 已弃用。
-- `Database<T>::get` 失败时只输出到 `stderr` 并返回 `T()`，无法区分“不存在”和“默认值”。
 - `Hash<T>` 为无模数自然溢出哈希，不抗碰撞攻击。
-- `FastIO` 对非浮点类型传 `num_digits` 会直接 `abort()`。
-- `Priority_Queue` 的 `pop`/`top` 不检查空堆。
-- `Dsu` 仅支持 `int` 键，`find` 返回内部编号而非原始键。
 
 ---
 

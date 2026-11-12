@@ -1,5 +1,6 @@
 #include<vector>
 #include<utility>
+#include<stdexcept>
 
 namespace __tytech_tyds{
     inline namespace __tytech_Priority_Queue{
@@ -36,11 +37,17 @@ namespace __tytech_tyds{
                 tot++;
             }
             void _pop(){
+                if(!tot){
+                    throw std::out_of_range("Invalid range");
+                }
                 tr[0] = tr[tot-1];
                 tot--;
                 down(0);
             }
             T _top(){
+                if(!tot){
+                    throw std::out_of_range("Invalid range");
+                }
                 return tr[0];
             }
         public:
